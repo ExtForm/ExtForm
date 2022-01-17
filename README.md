@@ -1,9 +1,9 @@
 ![ExtForm](logo.svg)
-# <center>Use Google Forms on your website</center>
-###### <center>![version](https://img.shields.io/badge/version-1.0.0-informational) ![script-version](https://img.shields.io/badge/script--version-60-brightgreen)</center>
+## Use Google Forms on your website
+###### ![version](https://img.shields.io/badge/version-1.0.1-informational) ![script-version](https://img.shields.io/badge/script--version-61-brightgreen)
 ---
 ## Multi-language
-* [한국어](README.kr.md) (WIP)
+* [한국어](README.kr.md) (작성중)
 
 ---
 ## Contents
@@ -21,7 +21,7 @@
 2. On top menu, click 'Extensions' then 'Apps Script'
 3. Apps script for your spreadsheet will be loaded. On the left sidebar, find 'Library' and click '+'.
 4. Insert `1i1cewH3ZPdQRH6FVUrCQQsV_JG4oZ1-vhtt9qJqN9dJiNHJntT0B9AJN` as Script ID and click 'Look up'
-5. Select the latest version ![script-version](https://img.shields.io/badge/script--version-60-informational)
+5. Select the latest version ![script-version](https://img.shields.io/badge/script--version-61-informational)
 6. Set Identifier as `ExtForm` then click 'OK'.
 7. Write these codes.
 ```js
