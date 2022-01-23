@@ -13,7 +13,7 @@
 ## What is this
 * Wanna embed Google Forms on your website? Check out this project!
 * You may view form in your website, using your website style/css (of course, you can submit too!)
-* Don't have your website yet? No need to worry, there is a sample page for you!
+* Don't have your website yet? No need to worry, there is a sample template for you!
 
 ---
 ## Setup
