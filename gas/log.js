@@ -10,11 +10,14 @@ function getLogSheet() {
  * @param {String} name 
  */
 function setLogSheet(spreadsheet,name) {
+
+  name = getTranslation('logSheet.name');
+
   let sheet = spreadsheet.getSheetByName(name);
   if(sheet != undefined) {
     for(let i=0;;i++) {
-      let name = Utilities.formatString('%s (%d)', name, i);
-      if(spreadsheet.getSheetByName(name)) continue;
+      let sheetName = Utilities.formatString('%s (%d)', name, i);
+      if(spreadsheet.getSheetByName(sheetName)) continue;
       sheet.setName(name);
       break;
     }

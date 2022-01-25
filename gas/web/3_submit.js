@@ -1,7 +1,7 @@
 function handle_submit(params) {
   let token = params.token[0];
   let formId = getCache('extform_token_' + token);
-  if(formId == null) throw new Error('Cannot match token, maybe you spent too much time: ' + token);
+  if(formId == null) throw new Error(getTranslation('web.submit.unknownToken', token));
 
   let form = FormApp.openById(formId);
   return submitForm(form,params);
@@ -40,7 +40,7 @@ function submitItem(item,type,values) {
 
   if(values == undefined) return undefined;
   for(let i=0;i<values.length;i++) {
-    values[i] = values[i].replace(/%20/gi," ").replace(/%0D%0A/gi, "\n");
+    values[i] = decodeURIComponent(values[i]);
   }
 
   switch(type) {
@@ -93,6 +93,6 @@ function submitItem(item,type,values) {
     case FormApp.ItemType.IMAGE:
       return undefined;
     default:
-      throw new Error("There is no itemtype: " + item.getType());
+      throw new Error(getTranslation('web.submit.unknownItemType', item.getType()));
   }
 }

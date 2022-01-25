@@ -503,7 +503,7 @@ function genSubmitUrl(){
             case "CHECKBOX":{
                 let elements = document.querySelectorAll(String.format('input[name="{0}"]:checked', id));
                 for(let j=0;j<elements.length;j++) {
-                    link += String.format('&{0}={1}', id, elements[j].value);
+                    link += String.format('&{0}={1}', id, encodeURIComponent(elements[j].value));
                 }
                 if(elements.length == 0) link += String.format('&{0}=', id);
                 break;
@@ -517,14 +517,14 @@ function genSubmitUrl(){
             case "PARAGRAPH_TEXT":
             case "SCALE": {
                 let element = document.getElementById(id);
-                link += String.format('&{0}={1}', id, element.value);
+                link += String.format('&{0}={1}', id, encodeURIComponent(element.value));
                 break;
             }
             case "GRID": {
                 for(let j=0;j<value.rowLength;j++) {
                     let elements = document.querySelectorAll(String.format('input[name="{0}_{1}"]:checked', id, j));
                     for(let k=0;k<elements.length;k++) {
-                        link += String.format('&{0}={1}', id, elements[k].value);
+                        link += String.format('&{0}={1}', id, encodeURIComponent(elements[k].value));
                     }
                 }
                 break;
@@ -540,7 +540,7 @@ function genSubmitUrl(){
                     }
                     result.push(arr);
                 }
-                link += String.format('&{0}={1}', id, JSON.stringify(result));
+                link += String.format('&{0}={1}', id, encodeURIComponent(JSON.stringify(result)));
                 break;
             }
             case "SECTION_HEADER": 
@@ -551,9 +551,10 @@ function genSubmitUrl(){
             }
         }
     }
-    try {
+    /*try {
         return link.replaceAll(" ","%20").replaceAll("\n","%0D%0A");
     } catch (err) { // internet explorer
         return link.replace(/" "/gi,"%20").replace(/"\n"/gi,"%0D%0A");
-    }
+    }*/
+    return link;
 }

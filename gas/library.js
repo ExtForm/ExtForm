@@ -1,4 +1,15 @@
 /**
+ * Set language.
+ * 
+ * ex. ```library___setLanguage("en");```
+ * 
+ * @params {string} Language code.
+ */
+function library__setLanguage(lang) {
+
+}
+
+/**
  * Make new 'Form List' sheet into current spreadsheet, which can manage forms.
  * (User needs edit permission to the spreadsheet)
  * 
@@ -39,11 +50,7 @@ function library__registerLogSheet_byUrl(url,name) {
   try {
     setLogSheet(SpreadsheetApp.openByUrl(url),name);
   } catch (err) {
-    throw new Error(Utilities.formatString('%s\n%s\n%s\n\n%s',
-      'Cannot load spreadsheet. Check if the url is valid, or you have edit permission on the spreadsheet.',
-      'Format must be string, and it must be inside "".',
-      'ex. library__registerLogSheet_byUrl("https://docs.google.com/spreadsheets/d/1q2w3e4r/edit");',
-      err));
+    throw new Error(getTranslation('library.invalidLogsheetUrl', err));
   }
 }
 

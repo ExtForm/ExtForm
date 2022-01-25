@@ -162,9 +162,9 @@ function getItemList(form) {
         break;
       case FormApp.ItemType.VIDEO:
       case FormApp.ItemType.PAGE_BREAK:
-        throw new Error("We don't support this type of item yet: " + type);
+        throw new Error(getTranslation('itemlist.workingType', type));
       default:
-        throw new Error("Unknown item type: " + type);
+        throw new Error(getTranslation('itemlist.unknownType', type));
     }
     return extra;
   }
