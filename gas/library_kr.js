@@ -1,11 +1,20 @@
 /**
+ * 언어를 한국어로 지정합니다.
+ * 
+ * 예: ```kr__언어를_한국어로_설정하기();```
+ */
+function kr__언어를_한국어로_설정하기() {
+  library__setLanguage("kr");
+}
+
+/**
  * 이 스프레드시트에 설문지들을 관리할 수 있는 '설문지 목록' 시트를 생성합니다.
  * (실행자에게 스프레드시트 수정 권한이 있어야 합니다)
  * 
  * 예: ```kr__이_스프레드시트에서_설문지_목록_생성하기();```
  */
 function kr__이_스프레드시트에서_설문지_목록_생성하기() {
-  library__registerFormListSheet_asActiveSpreadsheet("외부 설문지 목록");
+  library__registerFormListSheet_asActiveSpreadsheet();
 }
 
 /**
@@ -19,7 +28,7 @@ function kr__이_스프레드시트에서_설문지_목록_생성하기() {
  * @param {string} str 
  */
 function kr__이_스프레드시트에서_로그_시트_생성하기() {
-  library__registerLogSheet_asActiveSpreadsheet("외부 설문지 로그");
+  library__registerLogSheet_asActiveSpreadsheet();
 }
 
 /**
@@ -34,7 +43,7 @@ function kr__이_스프레드시트에서_로그_시트_생성하기() {
  */
 function kr__링크의_스프레드시트에서_로그_시트_생성하기(url) {
   try {
-    library__registerLogSheet_byUrl(url, "외부 설문지 로그");
+    library__registerLogSheet_byUrl(url);
   } catch (err) {
     throw new Error(Utilities.formatString('%s\n%s\n%s\n\n%s',
       '스프레드시트를 로드하지 못했습니다. 링크가 잘못되지는 않았는지, 해당 스프레드시트에 접근 권한이 있는지 다시 한 번 확인해보세요.',

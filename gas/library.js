@@ -6,7 +6,7 @@
  * @params {string} Language code.
  */
 function library__setLanguage(lang) {
-
+  setLanguage(lang);
 }
 
 /**
@@ -17,8 +17,8 @@ function library__setLanguage(lang) {
  * 
  * @params {string} Name of sheet
  */
-function library__registerFormListSheet_asActiveSpreadsheet(name) {
-  setup(SpreadsheetApp.getActiveSpreadsheet(), name);
+function library__registerFormListSheet_asActiveSpreadsheet() {
+  setup(SpreadsheetApp.getActiveSpreadsheet());
 }
 
 /**
@@ -30,8 +30,8 @@ function library__registerFormListSheet_asActiveSpreadsheet(name) {
  * 
  * Note. You may register external spreadsheet with `library__registerLogSheet_byUrl`.
  */
-function library__registerLogSheet_asActiveSpreadsheet(name) {
-  setLogSheet(SpreadsheetApp.getActiveSpreadsheet(),name);
+function library__registerLogSheet_asActiveSpreadsheet() {
+  setLogSheet(SpreadsheetApp.getActiveSpreadsheet());
 }
 
 /**
@@ -46,9 +46,9 @@ function library__registerLogSheet_asActiveSpreadsheet(name) {
  * @param {string} url The url of spreadsheet
  * @param {string} name The name of log sheet
  */
-function library__registerLogSheet_byUrl(url,name) {
+function library__registerLogSheet_byUrl(url) {
   try {
-    setLogSheet(SpreadsheetApp.openByUrl(url),name);
+    setLogSheet(SpreadsheetApp.openByUrl(url));
   } catch (err) {
     throw new Error(getTranslation('library.invalidLogsheetUrl', err));
   }

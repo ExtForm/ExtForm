@@ -1,30 +1,23 @@
 function getLogSheet() {
   return SpreadsheetApp
-    .openById(getProperty('extform_logsheet_id'))
-    .getSheetByName(getProperty('extform_logsheet_name'));
+    .openById(getProperty('extform_logsheet_spreadsheetId'))
+    .getSheetByName(getProperty('extform_logsheet_sheetId'));
 }
 
 /**
  * Register new logsheet
- * @param {SpreadsheetApp.Spreadsheet} spreadsheet 
- * @param {String} name 
+ * @param {SpreadsheetApp.Spreadsheet} spreadsheet spreadsheet to save as logsheet
  */
-function setLogSheet(spreadsheet,name) {
+function setLogSheet(spreadsheet) {
 
-  name = getTranslation('logSheet.name');
+  let name = getTranslation('logSheet.name');
 
   let sheet = spreadsheet.getSheetByName(name);
-  if(sheet != undefined) {
-    for(let i=0;;i++) {
-      let sheetName = Utilities.formatString('%s (%d)', name, i);
-      if(spreadsheet.getSheetByName(sheetName)) continue;
-      sheet.setName(name);
-      break;
-    }
+  if(spreadsheet.getSheetByName(name) == undefined) {
+    sheet = spreadsheet.insertSheet(name);
   }
-  spreadsheet.insertSheet(name);
-  setProperty('extform_logsheet_id', spreadsheet.getId());
-  setProperty('extform_logsheet_name', name);
+  setProperty('extform_logsheet_spreadsheetId', spreadsheet.getId());
+  setProperty('extform_logsheet_sheetId', sheet.getSheetId());
 }
 
 /* DIRECT LOG */

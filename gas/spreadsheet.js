@@ -1,6 +1,6 @@
-function setup(spreadsheet,name) {
+function setup(spreadsheet) {
 
-  name = getTranslation('formListSheet.sheetName')
+  let name = getTranslation('formListSheet.sheetName')
 
   if(spreadsheet.getSheetByName(name) == undefined) {
     //throw new Error(Utilities.formatString('이미 외부 설문지 목록이 존재합니다. "%s" 시트를 삭제하거나 이름을 변경하고 다시 시도해보세요.', SPREADSHEET_NAME));
@@ -84,4 +84,12 @@ function reloadForm(num) {
 function reloadFormItems(id) {
   setStatus(getTranslation('status.formlist.loadForm', getProperty(Utilities.formatString('extform_form_%s', id))));
   setProperty(Utilities.formatString('extform_form_%s_getform', id), getItemList(FormApp.openById(id)));
+}
+
+/**
+ * Set ui/status/log language
+ * @param {String} lang language to set
+ */
+function setLanguage(lang) {
+  setProperty('extform_lang',lang);
 }

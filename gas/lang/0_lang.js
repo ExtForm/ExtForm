@@ -11,8 +11,18 @@ function setLanguage(lang) {
 
 function getTranslation(translationkey, ...args) {
     let lang = getProperty('extform_lang');
-    /*switch (lang) {
-        
-    }*/
-    return Utilities.formatString(getTranslation_en(translationkey), args);
+    if(lang == null) lang = "en";
+    let translationValue;
+    switch (lang) {
+        case 'en':
+            translationValue = getTranslation_en(translationkey);
+            break;
+        case 'kr':
+            translationValue = getTranslation_kr(translationkey);
+            break;
+        default:
+            translationValue = getTranslation_en(translationkey);
+            break;
+    }
+    return Utilities.formatString(translationValue, args);
 }

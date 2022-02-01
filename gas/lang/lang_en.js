@@ -42,7 +42,7 @@ function getTranslation_en(key) {
         "formListSheet.description": "Description",
 
         // spreadsheet menu
-        "menu.name": "⚙ Form Setting",
+        "menu.name": "⚙ ExtForm",
         "menu.saveFormList": "Save Form List",
         "menu.reloadForm": "Reload: %s",
         
