@@ -1,7 +1,7 @@
 function getLogSheet() {
   return SpreadsheetApp
     .openById(getProperty('extform_logsheet_spreadsheetId'))
-    .getSheetByName(getProperty('extform_logsheet_sheetId'));
+    .getSheetByName(getProperty('extform_logsheet_sheetName'));
 }
 
 /**
@@ -10,14 +10,13 @@ function getLogSheet() {
  */
 function setLogSheet(spreadsheet) {
 
-  let name = getTranslation('logSheet.name');
+  let name = getTranslation('logsheet.name');
 
-  let sheet = spreadsheet.getSheetByName(name);
   if(spreadsheet.getSheetByName(name) == undefined) {
-    sheet = spreadsheet.insertSheet(name);
+    spreadsheet.insertSheet(name);
   }
   setProperty('extform_logsheet_spreadsheetId', spreadsheet.getId());
-  setProperty('extform_logsheet_sheetId', sheet.getSheetId());
+  setProperty('extform_logsheet_sheetName', name);
 }
 
 /* DIRECT LOG */

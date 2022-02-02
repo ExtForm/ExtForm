@@ -1,5 +1,5 @@
 /*
-  PROPERTY
+  PROPERTY (per document)
 
   prefix = extform_
   
@@ -10,12 +10,12 @@
   form_{id} = {id} 설문지의 name
   form_{id}_getitem = {id} 설문지의 아이템 목록 (stringfied JsonArray)
 
-  logsheet_spreadsheetId = 로그 스프레드시트 id
-  logsheet_sheetId = 로그 시트 id
+  formlistsheet_spreadsheetId = 설문지 목록 스프레드시트 id
+  formlistsheet_sheetName = 설문지 목록 시트 이름
 
   // ExtForm 1.0.2 (62)~
   logsheet_spreadsheetId = 로그 스프레드시트 id
-  logsheet_sheetId = 로그 시트 id
+  logsheet_sheetName = 로그 시트 이름
 
   // ExtForm ~1.0.1 (61)
   spreadsheet_id = 설문지 목록 스프레드시트 id
@@ -25,7 +25,7 @@
 */
 
 /*
-  CACHE
+  CACHE (per document)
 
   prefix = extform_
 
@@ -39,7 +39,7 @@
  * @returns value from key, null if not found
  */
 function getProperty(key) {
-  return PropertiesService.getUserProperties().getProperty(key);
+  return PropertiesService.getDocumentProperties().getProperty(key);
 }
 /**
  * Set data to storage
@@ -48,7 +48,7 @@ function getProperty(key) {
  * @param {String} value value to save
  */
 function setProperty(key,value) {
-  PropertiesService.getUserProperties().setProperty(key,value);
+  PropertiesService.getDocumentProperties().setProperty(key,value);
 }
 
 /**
@@ -57,7 +57,7 @@ function setProperty(key,value) {
  * @returns {String} value from key, null if not found
  */
 function getCache(key) {
-  return CacheService.getUserCache().get(key);
+  return CacheService.getDocumentCache().get(key);
 }
 
 /**
@@ -67,7 +67,7 @@ function getCache(key) {
  * @param {String} value value to save
  */
 function putCache(key,value) {
-  CacheService.getUserCache().put(key,value);
+  CacheService.getDocumentCache().put(key,value);
 }
 
 /**
@@ -76,5 +76,5 @@ function putCache(key,value) {
  * @param {String} key key to data
  */
 function removeCache(key) {
-  CacheService.getUserCache().remove(key);
+  CacheService.getDocumentCache().remove(key);
 }

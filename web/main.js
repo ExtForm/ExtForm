@@ -4,7 +4,7 @@
 const url = "https://script.google.com/macros/s/AKfycbz0xDE1DSaDKKl6AvzP6qLoEUFolnYlgo_tEpBb-LVVwYqoHXy2pDe-weEF7dSYeJb4/exec";
 const RECAPTCHA_SITEKEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"; // for test
 
-let div = document.getElementById('div');
+let div = document.getElementById('extform');
 let token;
 let forms = [];
 let values = [];

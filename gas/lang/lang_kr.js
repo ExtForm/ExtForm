@@ -28,7 +28,7 @@ function getTranslation_kr(key) {
         "lang.unsupportedLanguage": "아직 '%s' 언어를 지원하지 않습니다. 번역을 도와주세요! https://github.com/HURDOO/ExtForm",
         
         // log
-        "logSheet.name": "ExtForm 로그",
+        "logsheet.name": "ExtForm 로그",
         
         // reset (Skipped)
 

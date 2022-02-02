@@ -16,22 +16,22 @@ function setup(spreadsheet) {
     sheet.getRange(5,1).setValue('---------------------------------');
   }
 
-  setProperty('extform_spreadsheet_id', spreadsheet.getId());
-  setProperty('extform_spreadsheet_name', name);
+  setProperty('extform_formlistsheet_spreadsheetId', spreadsheet.getId());
+  setProperty('extform_formlistsheet_sheetName', name);
 
   reloadMenu();
   setStatus(getTranslation('status.done'));
 }
 
 function setStatus(str) {
-  SpreadsheetApp.openById(getProperty('extform_spreadsheet_id')).getSheetByName(getProperty('extform_spreadsheet_name')).getRange(2,1).setValue(getTranslation('formListSheet.status', str));
+  SpreadsheetApp.openById(getProperty('extform_formlistsheet_spreadsheetId')).getSheetByName(getProperty('extform_formlistsheet_sheetName')).getRange(2,1).setValue(getTranslation('formListSheet.status', str));
 }
 
 function reloadMenu() {
 
   setStatus(getTranslation('status.menu.reload'));
-  let spreadsheet = SpreadsheetApp.openById(getProperty('extform_spreadsheet_id'));
-  let sheet = spreadsheet.getSheetByName(getProperty('extform_spreadsheet_name'));
+  let spreadsheet = SpreadsheetApp.openById(getProperty('extform_formlistsheet_spreadsheetId'));
+  let sheet = spreadsheet.getSheetByName(getProperty('extform_formlistsheet_sheetName'));
 
   let menus = [{name : getTranslation('menu.saveFormList'), functionName: 'ExtForm.reloadMenu'},null];
   let forms = reloadFormList(sheet);

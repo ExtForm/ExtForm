@@ -1,7 +1,7 @@
 function test() {
-  //testSubmit(thirdForm);
-  //genHtml(thirdForm);
-  //genJs(thirdForm);
+  //PropertiesService.getUserProperties().deleteAllProperties();
+  Logger.log(PropertiesService.getUserProperties().getProperties());
+  //doGet({'parameters' : [{'type':'getformlist'}]});
 }
 
 function testSubmit(form) {
