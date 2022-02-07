@@ -1,8 +1,7 @@
 
 /* VARIABLES */
 
-const url = "https://script.google.com/macros/s/AKfycbz0xDE1DSaDKKl6AvzP6qLoEUFolnYlgo_tEpBb-LVVwYqoHXy2pDe-weEF7dSYeJb4/exec";
-const RECAPTCHA_SITEKEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"; // for test
+const url = 'https://script.google.com/macros/s/' + SCRIPT_KEY + '/exec';
 
 let div = document.getElementById('extform');
 let token;
@@ -17,14 +16,14 @@ let values = [];
 /* HTML LOAD FUNCTIONS */
 
 // loading
-const HTML_LOADING = '<div id="loading"><i class="fas fa-spinner fa-3x fa-spin"></i><p>Loading... (Takes $0 seconds)</p></div>';
+const HTML_LOADING = '<div id="loading"><i class="fas fa-spinner fa-3x fa-spin"></i><p>' + MSG.LOADING + '</p></div>';
 function showLoading(maxTime) {
     appendHtml(HTML_LOADING.replace('$0',maxTime));
     putHtml();
 }
 
 // getFormList
-const HTML_FORMLIST_START = '<header><h1>Form List</h1><p>Select your form!</p></header><section class="tiles">';
+const HTML_FORMLIST_START = '<header><h1>' + MSG.LIST_TITLE + '</h1><p>' + MSG.LIST_DESCRIPTION + '</p></header><section class="tiles">';
 const HTML_FORMLIST_FORM = '<article class="style{0}"><span class="image"><img src="images/pic0{0}.jpg" alt="" /></span><a href="#" onclick="showForm({1});return false;"><h2>{2}</h2><div class="content"><p>{3}</p></div></a></article>';
 const HTML_FORMLIST_END = '</section>';
 function showFormList() {
@@ -72,6 +71,7 @@ function doSubmit() {
     let link = genSubmitUrl();
     console.log(link);
     request(link, function(data) {
+        console.log(data);
         proceedSubmit();
     });
     
@@ -92,7 +92,7 @@ let showSubmitSucceedAlert = false;
 function proceedSubmit() {
     if(!showSubmitSucceedAlert) showSubmitSucceedAlert = true;
     else {
-        alert('Form submitted. Thanks!');
+        alert(MSG.SUBMIT_SUCCESS);
         clean();
         showFormList();
     }
@@ -126,7 +126,7 @@ function request(param,callback) {
         success: function(data) {
             if(data.error != null) {
                 console.log(data.error);
-                alert("An unknown error occurred. Try again later or contact to site owner.\n\n" + data.error);
+                alert(MSG.ERROR + "\n\n" + data.error);
                 location.reload();
             }
             else {
@@ -136,7 +136,7 @@ function request(param,callback) {
         },
         error: function(err) {
             console.log(err);
-            alert("An unknown error occurred. Try again later or contact to site owner.\n\n" + err);
+            alert(MSG.ERROR + "\n\n" + data.error);
             //location.reload();
         }
     });
@@ -193,7 +193,7 @@ function markdown(str) {
 showFormList();
 
 if (window.document.documentMode) {
-    alert('You\'re currently using Internet Explorer.\nSome features may not work.\n\nWe recommend to use another browser, such as Chrome, Edge, or Whale.');
+    alert(MSG.INTERNET_EXPLORER);
 }
 
 
@@ -233,7 +233,7 @@ function handleFormData(data) {
         const item = list[i];
         putItem(item);
     }
-    appendHtml('<input id="submit" type="submit" value="Submit" />');
+    appendHtml(String.format('<input id="submit" type="submit" value="{0}" />', MSG.SUBMIT));
     console.log(values);
 }
 
@@ -249,7 +249,7 @@ function putItem(item) {
             const choices = extra.choices;
             const required = extra.required;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
             for(let i=0;i<choices.length;i++)
             {
@@ -267,11 +267,11 @@ function putItem(item) {
         case "LIST": {
             const choices = extra.choices;
             const required = extra.required;
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
             
             appendHtml(String.format('<select id="{0}" {1}>', id, required ? 'required' : ''));
-            appendHtml(String.format('<option value="" required selected disabled>Choose</option>'));
+            appendHtml(String.format('<option value="" required selected disabled>{0}</option>', MSG.CHOICE));
             for(let i=0;i<choices.length;i++)
             {
                 const choice = choices[i];
@@ -286,7 +286,7 @@ function putItem(item) {
         case "CHECKBOX": {
             const choices = extra.choices;
             const required = extra.required;
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             for(let i=0;i<choices.length;i++)
@@ -302,7 +302,7 @@ function putItem(item) {
         }
         case "TEXT": {
             const required = extra.required;
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
             appendHtml(String.format('<input type="text" id="{0}" placeholder="Text input" {1}/>', id, required ? 'required' : ''));
             
@@ -311,7 +311,7 @@ function putItem(item) {
         }
         case "PARAGRAPH_TEXT": {
             const required = extra.required;
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
             appendHtml(String.format('<textarea id="{0}" placeholder="Text input" {1}></textarea>', id, required ? 'required' : ''));
             
@@ -334,7 +334,7 @@ function putItem(item) {
 
             const width = 50;
             
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
             appendHtml(String.format('<input type="range" id="{0}" min="{1}" max="{2}" value="-1" step="1" list="mark_{0}" style="appearance: auto; width: {3}%" {4}/>',
                 id, lowerBound, upperBound, width, required ? 'required' : ''))
@@ -356,7 +356,7 @@ function putItem(item) {
             const rows = extra.rows;
             const columns = extra.columns;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             appendHtml(String.format('<table><th>'));
@@ -383,7 +383,7 @@ function putItem(item) {
             const rows = extra.rows;
             const columns = extra.columns;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             appendHtml(String.format('<table><th>'));
@@ -409,7 +409,7 @@ function putItem(item) {
             const required = extra.required;
             const includesYear = extra.includesYear;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             appendHtml(String.format('<input type="date" id="{0}" name="{0}" {1} {2}/>', id,
@@ -425,11 +425,11 @@ function putItem(item) {
             const required = extra.required;
             const includesYear = extra.includesYear;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             appendHtml(String.format('<input type="datetime-local" id="{0}" name="{0}" {1} {2}/>', id,
-                includesYear ? 'min="2021-01-01" max="2021-12-31"' : '',
+                includesYear ? 'min="2022-01-01" max="2022-12-31"' : '',
                 required ? 'required' : ''));
             appendHtml(String.format('<br/>'));
 
@@ -439,7 +439,7 @@ function putItem(item) {
         case "TIME": {
             const required = extra.required;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             appendHtml(String.format('<input type="time" id="{0}" name="{0}" step="1" {1}/>', id, required ? 'required' : ''));
@@ -451,7 +451,7 @@ function putItem(item) {
         case "DURATION": {
             const required = extra.required;
 
-            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (Optional)' : ''));
+            appendHtml(String.format('<label style="font-size: 120%">{0}{1}</label>', title.md(), !required ? ' (' + MSG.OPTIONAL + ')' : ''));
             if(helpText != undefined) appendHtml(String.format('<label>{0}</label>', helpText));
 
             appendHtml(String.format('<input type="time" id="{0}" name="{0}" {1}/>', id, required ? 'required' : ''));
@@ -536,7 +536,7 @@ function genSubmitUrl(){
                     let arr = [];
                     let elements = document.querySelectorAll(String.format('input[name="{0}_{1}"]:checked', id, j));
                     for(let k=0;k<elements.length;k++) {
-                        arr.push(elements[k].value); 
+                        arr.push(elements[k].value);
                     }
                     result.push(arr);
                 }
