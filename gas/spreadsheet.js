@@ -5,8 +5,14 @@ function setup(spreadsheet) {
   if(spreadsheet.getSheetByName(name) == undefined) {
     //throw new Error(Utilities.formatString('이미 외부 설문지 목록이 존재합니다. "%s" 시트를 삭제하거나 이름을 변경하고 다시 시도해보세요.', SPREADSHEET_NAME));
 
-    let sheet = spreadsheet.insertSheet(name);
-    sheet.getRange(1,1).setValue(getTranslation('formListSheet.about'));
+    let sheet = spreadsheet.insertSheet(name,0);
+    //sheet.getRange(1,1).setValue(getTranslation('formListSheet.about'));
+    sheet.getRange(1,1).setRichTextValue(
+      SpreadsheetApp.newRichTextValue()
+        .setText('ExtForm (62)')
+        .setLinkUrl(0, 7, 'https://github.com/HURDOO/ExtForm')
+        .setTextStyle(0, 7, SpreadsheetApp.newTextStyle().setBold(true).build())
+        .build());
     sheet.getRange(2,1).setValue(getTranslation('formListSheet.status', getTranslation('status.menu.reload')));
     sheet.getRange(3,1).setValue('---------------------------------');
     sheet.getRange(4,1).setValue(getTranslation('formListSheet.identifier'));
@@ -37,8 +43,6 @@ function reloadMenu() {
   let forms = reloadFormList(sheet);
   for(let i=0;i<forms.length;i++) {
     let name = forms[i].name;
-    let id = forms[i].id;
-
     setStatus(getTranslation('status.menu.addForm', name));
     
     menus.push({name : Utilities.formatString(getTranslation('menu.reloadForm', name)), functionName : Utilities.formatString('ExtForm.reloadForm_%d', i)});
@@ -59,20 +63,22 @@ function reloadFormList(sheet) { //  = SpreadsheetApp.openById('').getSheetByNam
     setStatus(getTranslation('status.formlist.loadForm', name));
 
     let url = sheet.getRange(i,2).getValue();
-    let id = FormApp.openByUrl(url).getId();
 
     let title = sheet.getRange(i,3).getValue();
     let description = sheet.getRange(i,4).getValue();
 
-    formlist.push({name : name, title : title, description : description});
-    forms.push({name : name, id : id});
-    setProperty(Utilities.formatString('extform_form_%s', name), id);
-    setProperty(Utilities.formatString('extform_form_%s', id), name);
-    reloadFormItems(id);
+    try {
+      let id = FormApp.openByUrl(url).getId();
+      formlist.push({type : 'form', name : name, title : title, description : description});
+
+      forms.push({name : name, id : id});
+      setProperty(Utilities.formatString('extform_form_%s', name), id);
+      setProperty(Utilities.formatString('extform_form_%s', id), name);
+      reloadFormItems(id);
+    } catch (err) {
+      formlist.push({type : 'url', url : url, title : title, description : description});
+    }
   }
-  setProperty('extform_forms',JSON.stringify(forms));
-  setProperty('extform_formlist',JSON.stringify(formlist));
-  
   return forms;
 }
 
