@@ -2,31 +2,72 @@ function setup(spreadsheet) {
 
   let name = getTranslation('formListSheet.sheetName')
 
-  if(spreadsheet.getSheetByName(name) == undefined) {
+  let sheet = spreadsheet.getSheetByName(name);
+  
+  if(sheet == undefined) {
     //throw new Error(Utilities.formatString('이미 외부 설문지 목록이 존재합니다. "%s" 시트를 삭제하거나 이름을 변경하고 다시 시도해보세요.', SPREADSHEET_NAME));
-
-    let sheet = spreadsheet.insertSheet(name,0);
-    //sheet.getRange(1,1).setValue(getTranslation('formListSheet.about'));
-    sheet.getRange(1,1).setRichTextValue(
-      SpreadsheetApp.newRichTextValue()
-        .setText('ExtForm (62)')
-        .setLinkUrl(0, 7, 'https://github.com/HURDOO/ExtForm')
-        .setTextStyle(0, 7, SpreadsheetApp.newTextStyle().setBold(true).build())
-        .build());
-    sheet.getRange(2,1).setValue(getTranslation('formListSheet.status', getTranslation('status.menu.reload')));
-    sheet.getRange(3,1).setValue('---------------------------------');
-    sheet.getRange(4,1).setValue(getTranslation('formListSheet.identifier'));
-    sheet.getRange(4,2).setValue(getTranslation('formListSheet.url'));
-    sheet.getRange(4,3).setValue(getTranslation('formListSheet.title'));
-    sheet.getRange(4,4).setValue(getTranslation('formListSheet.description'));
-    sheet.getRange(5,1).setValue('---------------------------------');
+    sheet = makeNewSheet(name);
   }
+
+  handleInfo(sheet);
 
   setProperty('extform_formlistsheet_spreadsheetId', spreadsheet.getId());
   setProperty('extform_formlistsheet_sheetName', name);
 
   reloadMenu();
   setStatus(getTranslation('status.done'));
+}
+
+function makeNewSheet(name) {
+  let sheet = spreadsheet.insertSheet(name,0);
+  
+  sheet.getRange(1,1).setRichTextValue(
+    SpreadsheetApp.newRichTextValue()
+      .setText(Utilities.formatString('ExtForm (%d)', getVersion()))
+      .setLinkUrl(0, 7, 'https://github.com/HURDOO/ExtForm')
+      .setTextStyle(0, 7, SpreadsheetApp.newTextStyle().setBold(true).build())
+      .build()
+  );
+
+  sheet.getRange(2,1).setValue(getTranslation('formListSheet.status', getTranslation('status.menu.reload')));
+  sheet.getRange(3,1).setValue('---------------------------------');
+  sheet.getRange(4,1).setValue(getTranslation('formListSheet.identifier'));
+  sheet.getRange(4,2).setValue(getTranslation('formListSheet.url'));
+  sheet.getRange(4,3).setValue(getTranslation('formListSheet.title'));
+  sheet.getRange(4,4).setValue(getTranslation('formListSheet.description'));
+  sheet.getRange(5,1).setValue('---------------------------------');
+
+  return sheet;
+}
+
+function handleInfo(sheet) {
+  let info = getInfo();
+  let content = '';
+
+  let latest = info['version'];
+  if(latest != getVersion()) {
+    content = getTranslation('formListSheet.newVersion', latest);
+  }
+
+  let notice = info['notice'];
+  if(notice != '') {
+    if(content != '') content += ' ';
+    content += getTranslation('formListSheet.notice', notice);
+  }
+
+  sheet.getRange(1,2).setValue(content);
+}
+
+function getInfo() {
+  let response = UrlFetchApp.fetch('http://info.extform.kro.kr');
+  let code = response.getResponseCode();
+  let content = response.getContentText();
+  log('info',Utilities.formatString("%d / %s", code, content));
+  return JSON.parse(content);
+}
+
+function getVersion() {
+  return 62;
 }
 
 function setStatus(str) {

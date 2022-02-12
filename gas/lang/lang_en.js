@@ -34,7 +34,8 @@ function getTranslation_en(key) {
 
         // spreadsheet
         "formListSheet.sheetName": "ExtForm forms",
-        "formListSheet.about": "About: https://github.com/HURDOO/ExtForm",
+        "formListSheet.newVersion": "🚀 Version %d is available!",
+        "formListSheet.notice" : "📣 Notice: %s",
         "formListSheet.status": "Status: %s",
         "formListSheet.identifier": "Identifier",
         "formListSheet.url": "Form url",

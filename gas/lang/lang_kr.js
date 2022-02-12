@@ -34,7 +34,8 @@ function getTranslation_kr(key) {
 
         // spreadsheet
         "formListSheet.sheetName": "ExtForm 설문지 목록",
-        "formListSheet.about": "소개: https://github.com/HURDOO/ExtForm",
+        "formListSheet.newVersion": "🚀 버전 %d을(를) 사용할 수 있습니다!",
+        "formListSheet.notice" : "📣 공지: %s",
         "formListSheet.status": "상태: %s",
         "formListSheet.identifier": "이름",
         "formListSheet.url": "링크",
