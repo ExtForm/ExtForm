@@ -9,13 +9,25 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Pushes test file
+    - name: extform-gas
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'gas/.'
         destination_repo: 'ExtForm/extform-gas'
+        destination_folder: './'
+        user_email: '64835865+HURDOO@users.noreply.github.com'
+        user_name: 'HURDOO'
+        commit_message: 'Auto commit'
+    
+    - name: extform-web
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'web/.'
+        destination_repo: 'ExtForm/extform-web'
         destination_folder: './'
         user_email: '64835865+HURDOO@users.noreply.github.com'
         user_name: 'HURDOO'
