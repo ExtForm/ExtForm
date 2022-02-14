@@ -19,7 +19,7 @@
 ## 설치 방법
 * Google Apps Script 라이브러리 ID: `1i1cewH3ZPdQRH6FVUrCQQsV_JG4oZ1-vhtt9qJqN9dJiNHJntT0B9AJN` ![스크립트 버전](https://img.shields.io/badge/스크립트--버전-61-informational)
 * kr을 입력하면 사용 가능한 한국어 명령어들이 떠요.
-* 자세한 설치 방법은 [위키](https://github.com/HURDOO/ExtForm/wiki)를 참고해주세요.
+* 자세한 설치 방법은 [위키](https://github.com/ExtForm/ExtForm/wiki)를 참고해주세요.
 
 ```js
 function setup() {
