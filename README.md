@@ -1,6 +1,6 @@
 ![ExtForm](logo.svg)
-## Use Google Forms on your website
-###### ![version](https://img.shields.io/badge/version-1.0.1-informational) ![script-version](https://img.shields.io/badge/script--version-61-brightgreen)
+## Embed Google Forms on your website
+![version](https://img.shields.io/badge/version-62-brightgreen)
 ---
 ## Multi-language
 * [한국어](README.kr.md) (작성중)
@@ -21,16 +21,16 @@
 2. On top menu, click 'Extensions' then 'Apps Script'
 3. Apps script for your spreadsheet will be loaded. On the left sidebar, find 'Library' and click '+'.
 4. Insert `1i1cewH3ZPdQRH6FVUrCQQsV_JG4oZ1-vhtt9qJqN9dJiNHJntT0B9AJN` as Script ID and click 'Look up'
-5. Select the latest version ![script-version](https://img.shields.io/badge/script--version-61-informational)
+5. Select the latest version ![version](https://img.shields.io/badge/version-62-brightgreen)
 6. Set Identifier as `ExtForm` then click 'OK'.
 7. Write these codes.
 ```js
 function setup() {
-    ExtForm.library__registerFormListSheet_asActiveSpreadsheet("External Form List");
-    ExtForm.library__registerLogSheet_asActiveSpreadsheet("External Form Log");
+    ExtForm.library__registerFormListSheet_asActiveSpreadsheet();
+    ExtForm.library__registerLogSheet_asActiveSpreadsheet();
 }
 
-function doGet() {
+function doGet(e) {
     ExtForm.doGet(e);
 }
 ```
