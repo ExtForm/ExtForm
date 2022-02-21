@@ -9,7 +9,11 @@ function setup(spreadsheet) {
     sheet = makeNewSheet(name);
   }
 
-  handleInfo(sheet);
+  try {
+    handleInfo(sheet);
+  } catch (ex) {
+    Logger.log('Failed to get updates and notices.' + ex);
+  }
 
   setProperty('extform_formlistsheet_spreadsheetId', spreadsheet.getId());
   setProperty('extform_formlistsheet_sheetName', name);
@@ -24,7 +28,7 @@ function makeNewSheet(name) {
   sheet.getRange(1,1).setRichTextValue(
     SpreadsheetApp.newRichTextValue()
       .setText(Utilities.formatString('ExtForm (%d)', getVersion()))
-      .setLinkUrl(0, 7, 'https://github.com/HURDOO/ExtForm')
+      .setLinkUrl(0, 7, 'https://github.com/ExtForm/ExtForm')
       .setTextStyle(0, 7, SpreadsheetApp.newTextStyle().setBold(true).build())
       .build()
   );
@@ -96,8 +100,8 @@ function reloadMenu() {
 function reloadFormList(sheet) { //  = SpreadsheetApp.openById('').getSheetByName('')
 
   setStatus(getTranslation('status.menu.reload'));
-  let forms = [];
-  let formlist = [];
+  let forms = []; // only forms (used in reset)
+  let formlist = []; // data to return to client (contains link)
   for(let i=6;;i++) {
     let name = sheet.getRange(i,1).getValue();
     if(name == '') break;
@@ -120,6 +124,8 @@ function reloadFormList(sheet) { //  = SpreadsheetApp.openById('').getSheetByNam
       formlist.push({type : 'url', url : url, title : title, description : description});
     }
   }
+
+  setProperty('extform_formlist', JSON.stringify(formlist));
   return forms;
 }
 

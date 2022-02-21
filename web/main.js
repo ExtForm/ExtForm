@@ -8,11 +8,6 @@ let token;
 let forms = [];
 let values = [];
 
-
-
-
-
-
 /* HTML LOAD FUNCTIONS */
 
 // loading
@@ -25,6 +20,7 @@ function showLoading(maxTime) {
 // getFormList
 const HTML_FORMLIST_START = '<header><h1>' + MSG.LIST_TITLE + '</h1><p>' + MSG.LIST_DESCRIPTION + '</p></header><section class="tiles">';
 const HTML_FORMLIST_FORM = '<article class="style{0}"><span class="image"><img src="images/pic0{0}.jpg" alt="" /></span><a href="#" onclick="showForm({1});return false;"><h2>{2}</h2><div class="content"><p>{3}</p></div></a></article>';
+const HTML_FORMLIST_URL = '<article class="style{0}"><span class="image"><img src="images/pic0{0}.jpg" alt="" /></span><a href="{1}" target="_blank"><h2>{2}</h2><div class="content"><p>{3}</p></div></a></article>';
 const HTML_FORMLIST_END = '</section>';
 function showFormList() {
     clean();
@@ -32,12 +28,24 @@ function showFormList() {
     request('?type=getformlist', function(data) {
         appendHtml(HTML_FORMLIST_START);
         for(let i=0;i<data.length;i++) {
-            let name = data[i].name;
+            let type = data[i].type;
             let title = data[i].title;
             let description = data[i].description;
+            switch(type) {
+                case 'form': {
+                    let name = data[i].name;
 
-            appendHtml(String.format(HTML_FORMLIST_FORM, (i%6)+1, i, title, description));
-            forms.push(name);
+                    appendHtml(String.format(HTML_FORMLIST_FORM, (i%6)+1, i, title, description));
+                    forms.push(name);
+                    break;
+                }
+                case 'url': {
+                    let url = data[i].url;
+
+                    appendHtml(String.format(HTML_FORMLIST_URL, (i%6)+1, url, title, description));
+                    break;
+                }
+            }
         }
         appendHtml(HTML_FORMLIST_END);
         putHtml();
