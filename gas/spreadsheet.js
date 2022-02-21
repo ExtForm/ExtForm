@@ -12,6 +12,7 @@ function setup(spreadsheet) {
   try {
     handleInfo(sheet);
   } catch (ex) {
+    sheet.getRange(1,2).setValue("");
     Logger.log('Failed to get updates and notices.' + ex);
   }
 
