@@ -6,9 +6,10 @@ function setup(spreadsheet) {
   
   if(sheet == undefined) {
     //throw new Error(Utilities.formatString('이미 외부 설문지 목록이 존재합니다. "%s" 시트를 삭제하거나 이름을 변경하고 다시 시도해보세요.', SPREADSHEET_NAME));
-    sheet = makeNewSheet(spreadsheet,name);
+    sheet = spreadsheet.insertSheet(name,0);
   }
 
+  putSheetHeader(sheet);
   try {
     handleInfo(sheet);
   } catch (ex) {
@@ -23,9 +24,7 @@ function setup(spreadsheet) {
   setStatus(getTranslation('status.done'));
 }
 
-function makeNewSheet(spreadsheet,name) {
-  let sheet = spreadsheet.insertSheet(name,0);
-  
+function putSheetHeader(sheet) {
   sheet.getRange(1,1).setRichTextValue(
     SpreadsheetApp.newRichTextValue()
       .setText(Utilities.formatString('ExtForm (%d)', getVersion()))
@@ -41,8 +40,6 @@ function makeNewSheet(spreadsheet,name) {
   sheet.getRange(4,3).setValue(getTranslation('formListSheet.title'));
   sheet.getRange(4,4).setValue(getTranslation('formListSheet.description'));
   sheet.getRange(5,1).setValue('---------------------------------');
-
-  return sheet;
 }
 
 function handleInfo(sheet) {
