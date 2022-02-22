@@ -32,17 +32,19 @@ function showFormList() {
             let title = data[i].title;
             let description = data[i].description;
             switch(type) {
-                case 'form': {
-                    let name = data[i].name;
-
-                    appendHtml(String.format(HTML_FORMLIST_FORM, (i%6)+1, i, title, description));
-                    forms.push(name);
-                    break;
-                }
                 case 'url': {
                     let url = data[i].url;
 
                     appendHtml(String.format(HTML_FORMLIST_URL, (i%6)+1, url, title, description));
+                    break;
+                }
+                case 'form':
+                default:
+                {
+                    let name = data[i].name;
+
+                    appendHtml(String.format(HTML_FORMLIST_FORM, (i%6)+1, i, title, description));
+                    forms.push(name);
                     break;
                 }
             }

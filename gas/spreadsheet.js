@@ -6,7 +6,7 @@ function setup(spreadsheet) {
   
   if(sheet == undefined) {
     //throw new Error(Utilities.formatString('이미 외부 설문지 목록이 존재합니다. "%s" 시트를 삭제하거나 이름을 변경하고 다시 시도해보세요.', SPREADSHEET_NAME));
-    sheet = makeNewSheet(name);
+    sheet = makeNewSheet(spreadsheet,name);
   }
 
   try {
@@ -23,7 +23,7 @@ function setup(spreadsheet) {
   setStatus(getTranslation('status.done'));
 }
 
-function makeNewSheet(name) {
+function makeNewSheet(spreadsheet,name) {
   let sheet = spreadsheet.insertSheet(name,0);
   
   sheet.getRange(1,1).setRichTextValue(
