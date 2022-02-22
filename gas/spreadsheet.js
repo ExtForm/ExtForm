@@ -139,11 +139,3 @@ function reloadFormItems(id) {
   setStatus(getTranslation('status.formlist.loadForm', getProperty(Utilities.formatString('extform_form_%s', id))));
   setProperty(Utilities.formatString('extform_form_%s_getform', id), getItemList(FormApp.openById(id)));
 }
-
-/**
- * Set ui/status/log language
- * @param {String} lang language to set
- */
-function setLanguage(lang) {
-  setProperty('extform_lang',lang);
-}
