@@ -72,7 +72,7 @@ function getInfo() {
 }
 
 function getVersion() {
-  return 62;
+  return 63;
 }
 
 function setStatus(str) {
