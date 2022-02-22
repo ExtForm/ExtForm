@@ -1,6 +1,6 @@
 ![ExtForm](logo.svg)
 ## Embed Google Forms on your website
-![version](https://img.shields.io/badge/version-62-brightgreen)
+![version](http://badge-en.extform.kro.kr)
 ---
 ## Multi-language
 * [한국어](README.kr.md) (작성중)
@@ -21,7 +21,7 @@
 2. On top menu, click 'Extensions' then 'Apps Script'
 3. Apps script for your spreadsheet will be loaded. On the left sidebar, find 'Library' and click '+'.
 4. Insert `1i1cewH3ZPdQRH6FVUrCQQsV_JG4oZ1-vhtt9qJqN9dJiNHJntT0B9AJN` as Script ID and click 'Look up'
-5. Select the latest version ![version](https://img.shields.io/badge/version-62-brightgreen)
+5. Select the latest version ![version](http://badge-en.extform.kro.kr)
 6. Set Identifier as `ExtForm` then click 'OK'.
 7. Write these codes.
 ```js

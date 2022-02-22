@@ -1,6 +1,6 @@
 ![ExtForm](logo.svg)
 ## 자신의 웹사이트에서 구글 설문지를 사용하세요
-![버전](https://img.shields.io/badge/버전-62-brightgreen)
+![버전](http://badge-kr.extform.kro.kr)
 ---
 ## 다국어 번역
 * [영어](README.md)
@@ -17,8 +17,14 @@
 
 ---
 ## 설치 방법
-* Google Apps Script 라이브러리 ID: `1i1cewH3ZPdQRH6FVUrCQQsV_JG4oZ1-vhtt9qJqN9dJiNHJntT0B9AJN` ![버전](https://img.shields.io/badge/버전-62-brightgreen)
-* kr을 입력하면 사용 가능한 한국어 명령어들이 떠요.
+* Google Apps Script 라이브러리 ID: `1i1cewH3ZPdQRH6FVUrCQQsV_JG4oZ1-vhtt9qJqN9dJiNHJntT0B9AJN` ![버전](http://badge-kr.extform.kro.kr)
+```js
+function setup() {
+    ExtForm.kr__언어를_한국어로_설정하기();
+    ExtForm.kr__이_스프레드시트에서_설문지_목록_생성하기();
+    ExtForm.kr__이_스프레드시트에서_로그_시트_생성하기();
+}
+```
 * 자세한 설치 방법은 [위키](https://github.com/ExtForm/ExtForm/wiki)를 참고해주세요.
 
 ---
