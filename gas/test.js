@@ -1,6 +1,6 @@
 function test() {
   //PropertiesService.getUserProperties().deleteAllProperties();
-  Logger.log(PropertiesService.getUserProperties().getProperties());
+  //Logger.log(PropertiesService.getUserProperties().getProperties());
   //doGet({'parameters' : [{'type':'getformlist'}]});
 }
 
