@@ -61,5 +61,5 @@ function kr__링크의_스프레드시트에서_로그_시트_생성하기(url) 
  * 예: ```kr__모든_설문지의_응답_초기화하기();```
  */
 function kr__모든_설문지의_응답_초기화하기() {
-  library__resetAllSubmits();
+  library__resetAllResponses();
 }

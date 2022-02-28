@@ -124,6 +124,7 @@ function reloadFormList(sheet) { //  = SpreadsheetApp.openById('').getSheetByNam
   }
 
   setProperty('extform_formlist', JSON.stringify(formlist));
+  setProperty('extform_forms', JSON.stringify(forms));
   return forms;
 }
 
