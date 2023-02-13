@@ -15,11 +15,12 @@ function handle_reload(params) {
         try {
             let spreadsheet = SpreadsheetApp.openById(getProperty('extform_formlistsheet_spreadsheetId'));
             let sheet = spreadsheet.getSheetByName(getProperty('extform_formlistsheet_sheetName'));
-            reloadFormList(spreadsheet, sheet);
+            reloadFormList(sheet);
         }
         catch (err) {
             throw new Error('Error while reloading the entire sheet; ' + err);
         }
     }
+    setStatus(getTranslation('status.done'));
     return '{"status":"success"}';
 }
