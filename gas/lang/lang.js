@@ -24,5 +24,5 @@ function getTranslation(translationkey, ...args) {
             translationValue = getTranslation_en(translationkey);
             break;
     }
-    return Utilities.formatString(translationValue, args);
+    return Utilities.formatString(translationValue, ...args);
 }
