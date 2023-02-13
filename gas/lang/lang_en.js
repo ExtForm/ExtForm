@@ -13,6 +13,11 @@ function getTranslation_en(key) {
         "web.submit.unknownToken": "Cannot match token '%s'. Maybe you spent too much time submitting, so the token has expired.",
         "web.submitError": "Error while submitting the form; %s",
         "web.submit.unknownItemType": "Unknown '%s' type of form item",
+
+        // web/4_reload
+        "web.reload.reloadError": "Error while reloading the form '%s'; %s",
+        "web.reload.unknownForm": "Unknown form '%s'",
+        "web.reload.unknownSheet" : "Unable to load form list sheet",
         
         // itemlist
         "itemlist.workingType": "ExtForm doesn't support '%s' type of form item yet",

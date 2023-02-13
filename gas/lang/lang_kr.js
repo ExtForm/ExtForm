@@ -15,7 +15,7 @@ function getTranslation_kr(key) {
         "web.submit.unknownItemType": "'%s'는 알 수 없는 설문지 아이템 종류입니다.",
 
         // web/4_reload
-        "web.reload.reloadError": "%s 설문지를 다시 불러오는 중 오류가 발생했습니다; %s",
+        "web.reload.reloadError": "'%s' 설문지를 다시 불러오는 중 오류가 발생했습니다; %s",
         "web.reload.unknownForm": "'%s'는 알 수 없는 설문지입니다.",
         "web.reload.unknownSheet" : "설문지 목록 시트를 불러올 수 없습니다.",
         
