@@ -13,7 +13,9 @@ function handle_reload(params) {
     }
     else {
         try {
-            reloadMenu();
+            let spreadsheet = SpreadsheetApp.openById(getProperty('extform_formlistsheet_spreadsheetId'));
+            let sheet = spreadsheet.getSheetByName(getProperty('extform_formlistsheet_sheetName'));
+            reloadFormList(spreadsheet, sheet);
         }
         catch (err) {
             throw new Error('Error while reloading the entire sheet; ' + err);
