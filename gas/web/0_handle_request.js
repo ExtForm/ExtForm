@@ -39,6 +39,10 @@ function handle(e)
       result = handle_submit(params);
       break;
 
+    case "reload":
+      result = handle_reload(params);
+      break;
+
     default:
       throw new SyntaxError(getTranslation('web.handle.unknownRequestType', type));
   }

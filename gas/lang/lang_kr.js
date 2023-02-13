@@ -13,6 +13,11 @@ function getTranslation_kr(key) {
         "web.submit.unknownToken": "'%s' 토큰을 일치시킬 수 없습니다. 제출하기까지 너무 많은 시간이 소요되어 토큰이 만료되었을 수 있습니다.",
         "web.submitError": "설문지를 제출하던 중 오류가 발생했습니다; %s",
         "web.submit.unknownItemType": "'%s'는 알 수 없는 설문지 아이템 종류입니다.",
+
+        // web/4_reload
+        "web.reload.reloadError": "%s 설문지를 다시 불러오는 중 오류가 발생했습니다; %s",
+        "web.reload.unknownForm": "'%s'는 알 수 없는 설문지입니다.",
+        "web.reload.unknownSheet" : "설문지 목록 시트를 불러올 수 없습니다.",
         
         // itemlist
         "itemlist.workingType": "ExtForm은 아직 '%s' 종류의 설문지 아이템을 지원하지 않습니다.",

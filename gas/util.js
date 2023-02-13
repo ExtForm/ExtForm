@@ -17,6 +17,8 @@
   logsheet_spreadsheetId = 로그 스프레드시트 id
   logsheet_sheetName = 로그 시트 이름
 
+
+  @ Deprecated
   // ExtForm ~1.0.1 (61)
   spreadsheet_id = 설문지 목록 스프레드시트 id
   spreadsheet_name = 설문지 목록 시트 이름
